@@ -1,0 +1,27 @@
+{
+  "name": "schoolplatformbackend",
+  "version": "1.0.0",
+  "description": "SchoolPlatform código backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivanCordova/SchoolPlatformBackend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ivanCordova/SchoolPlatformBackend/issues"
+  },
+  "homepage": "https://github.com/ivanCordova/SchoolPlatformBackend#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.18.1",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.19.0"
+  }
+}
