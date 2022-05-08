@@ -12,6 +12,8 @@ const alumnosGet = async (req = request, res = response) => {
     }
 }
 
+
+
 module.exports = {
     alumnosGet
 }
