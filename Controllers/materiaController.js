@@ -1,47 +1,38 @@
 const { response, request } = require("express")
-const {AlumnoModel} = require("../Models/indexModel")
-const {GrupoModel} = require("../Models/indexModel")
+const {MateriaModel} = require("../Models/indexModel")
 
-
-
-const getAllAlumnos = async (req = request, res = response) => {
+const getAllMaterias = async (req = request, res = response) => {
     try {
-        const alumnos = await AlumnoModel.findAll({
-            include: {
-                model: GrupoModel,
-            }
-        })
-        res.status(200).json(alumnos)
+        const materias = await MateriaModel.findAll()
+        res.status(200).json(materias)
     } catch (error) {
         res.status(500).json({message: error.message})
+        
     }
 }
 
-const getAlumno = async (req = request, res = response) => {
+const getMateria = async (req = request, res = response) => {
     try {
         const id = req.params.id
-        const alumnos = await AlumnoModel.findAll({
-            where:{id},
-            include: {
-                model: GrupoModel
-            }
+        const materia = await MateriaModel.findAll({
+            where:{id}
         })
-        if(alumnos == 0){
+        if(materia == 0){
             return res.status(400).json({
-                msg :'No se encontro al alumno'
+                msg :'No se encontro la materia'
             });
         }else{
 
-            res.status(200).json(alumnos)
+            res.status(200).json(materia)
         }
     } catch (error) {
         res.status(500).json({message: error.message})
     }
 }
 
-const createAlumno = async (req = request, res = response) => {
+const createMateria = async (req = request, res = response) => {
     try {
-        await AlumnoModel.create(req.body)
+        await MateriaModel.create(req.body)
         res.status(200).json({
             "message": "¡Registro creado correctamente!"
         })
@@ -50,9 +41,9 @@ const createAlumno = async (req = request, res = response) => {
     }
 }
 
-const updateAlumno = async (req = request, res = response) => {
+const updateMateria = async (req = request, res = response) => {
     try {
-        await AlumnoModel.update(req.body,{
+        await MateriaModel.update(req.body,{
             where:{id: req.params.id}
         })
         res.status(200).json({
@@ -63,9 +54,9 @@ const updateAlumno = async (req = request, res = response) => {
     }
 }
 
-const deleteAlumno = async (req = request, res = response) => {
+const deleteMateria = async (req = request, res = response) => {
     try {
-        await AlumnoModel.destroy({
+        await MateriaModel.destroy({
             where: {id: req.params.id}
         })
         res.status(200).json({
@@ -76,12 +67,10 @@ const deleteAlumno = async (req = request, res = response) => {
     }
 }
 
-
-
 module.exports = {
-    getAllAlumnos,
-    getAlumno,
-    createAlumno,
-    updateAlumno,
-    deleteAlumno
+    getAllMaterias,
+    getMateria,
+    createMateria,
+    updateMateria,
+    deleteMateria
 }

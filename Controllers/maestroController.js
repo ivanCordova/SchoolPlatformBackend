@@ -21,58 +21,77 @@ const getAllMaestros = async (req = request, res = response) => {
     }
 }
 
-const getAlumno = async (req = request, res = response) => {
+const getMaestro = async (req = request, res = response) => {
     try {
         const id = req.params.id
-        const alumnos = await AlumnoModel.findAll({
+        const maestros = await MaestroModel.findAll({
             where:{id},
-            include: GrupoModel
+            include:[{
+                model: GrupoModel,
+                through: { attributes: [] } // no se incluyen los atributos de la relacion
+                //attributes: ['nombre'] <- incluye los atributos del modelo principal
+            },{
+                model: MateriaModel,
+                through: { attributes: [] } // no se incluyen los atributos de la relacion
+                //attributes: ['nombre'] <- incluye los atributos del modelo principal
+            }]
         })
-        res.json(alumnos)
+        if(maestros == 0){
+            return res.status(400).json({
+                msg :'No se encontro al alumno'
+            });
+        }else{
+
+            res.status(200).json(maestros)
+        }
     } catch (error) {
-        res.json({message: error.message})
+        res.status(500).json({message: error.message})
     }
 }
 
-const createAlumno = async (req = request, res = response) => {
+const createMaestro = async (req = request, res = response) => {
     try {
-        await AlumnoModel.create(req.body)
-        res.json({
+        await MaestroModel.create(req.body)
+        res.status(200).json({
             "message": "¡Registro creado correctamente!"
         })
     } catch (error) {
-        res.json({message: error.message})
+        res.status(500).json({message: error.message})
     }
 }
 
-const updateAlumno = async (req = request, res = response) => {
+const updateMaestro = async (req = request, res = response) => {
     try {
-        await AlumnoModel.update(req.body,{
+        await MaestroModel.update(req.body,{
             where:{id: req.params.id}
         })
-        res.json({
+        res.status(200).json({
             "message": "¡Registro actualizado correctamente!"
         })
     } catch (error) {
-        res.json({message: error.message})
+        res.status(500).json({message: error.message})
     }
 }
 
-const deleteAlumno = async (req = request, res = response) => {
+const deleteMaestro = async (req = request, res = response) => {
     try {
-        await AlumnoModel.destroy({
+        await MaestroModel.destroy({
             where: {id: req.params.id}
         })
-        res.json({
+        res.status(200).json({
             "message": "¡Registro eliminado correctamente!"
         })
     } catch (error) {
-        res.json({message: error.message})
+        res.status(500).json({message: error.message})
     }
 }
 
 
-
 module.exports = {
-    getAllMaestros
+    getAllMaestros,
+    getMaestro,
+    createMaestro,
+    updateMaestro,
+    deleteMaestro
+
 }
