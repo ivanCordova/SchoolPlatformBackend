@@ -1,22 +1,8 @@
 const { response, request } = require("express")
 const {MaestroModel, Grupo_MaestroModel, GrupoModel, AlumnoModel, MateriaModel, Materia_maestroModel } = require("../Models/indexModel")
 
-const getAllMaestros = async (req = request, res = response) => {
-    try {
-        const maestros = await MaestroModel.findAll({
-            include:{
-                model: GrupoModel,
-                through: { attributes: [] } // no se incluyen los atributos de la relacion
-                //attributes: ['nombre'] <- incluye los atributos del modelo principal
-            }
-        })
-        res.json(maestros)
-    } catch (error) {
-        res.json({message: error.message})
-    }
-}
 
-/* const getAllMaestros = async (req = request, res = response) => {
+const getAllMaestros = async (req = request, res = response) => {
     try {
         const maestros = await MaestroModel.findAll({
             include:[{
@@ -33,7 +19,7 @@ const getAllMaestros = async (req = request, res = response) => {
     } catch (error) {
         res.json({message: error.message})
     }
-} */
+}
 
 const getAlumno = async (req = request, res = response) => {
     try {

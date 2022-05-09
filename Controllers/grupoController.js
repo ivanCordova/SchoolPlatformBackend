@@ -6,7 +6,7 @@ const getAllGrupos = async (req = request, res = response) => {
     try {
         const grupos = await GrupoModel.findAll({
             include: {
-                model: Grupo_MaestroModel,
+                model: MaestroModel,
                 through: { attributes: [] }
             }
             
