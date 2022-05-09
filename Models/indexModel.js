@@ -21,9 +21,9 @@ TareaModel.belongsToMany(AlumnoModel,{through: EntregasModel, foreignKey: "id_al
 AlumnoModel.belongsToMany(MateriaModel,{through:Alumno_materiaModel, foreignKey:"id_materia"})
 MateriaModel.belongsToMany(AlumnoModel,{through:Alumno_materiaModel, foreignKey:"id_alumno"})
 
-//materia* ..... *maestro
+/* //materia* ..... *maestro
 MateriaModel.belongsToMany(MaestroModel,{through:Materia_maestroModel, foreignKey:"id_maestro"})
-MaestroModel.belongsToMany(MateriaModel,{through:Materia_maestroModel, foreignKey: "id_materia"})
+MaestroModel.belongsToMany(MateriaModel,{through:Materia_maestroModel, foreignKey: "id_materia"}) */
 
 // grupo*.......*maestro
 GrupoModel.belongsToMany(MaestroModel,{through: Grupo_MaestroModel, foreignKey: "id_maestro"})
@@ -36,5 +36,11 @@ GrupoModel.hasMany(AlumnoModel,{foreignKey: "id_grupo"}) */
 module.exports = {
     AlumnoModel,
     GrupoModel,
-    MaestroModel
+    MaestroModel,
+    TareaModel,
+    MateriaModel,
+    EntregasModel,
+    Alumno_materiaModel,
+    Materia_maestroModel,
+    Grupo_MaestroModel
 }

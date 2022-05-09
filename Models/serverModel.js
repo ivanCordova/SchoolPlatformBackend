@@ -7,6 +7,7 @@ class Server {
         this.port = process.env.PORT
         this.alumnosPath = process.env.alumnosPath
         this.grupoPath = process.env.grupoPath
+        this.maestrosPath = process.env.maestrosPath
 
         // Middlewares
         this.middlewares()
@@ -26,6 +27,7 @@ class Server {
     routes() {
         this.app.use(this.alumnosPath,require("../Routes/alumnoRoute"))
         this.app.use(this.grupoPath,require("../Routes/grupoRoute"))
+        this.app.use(this.maestrosPath,require("../Routes/maestroRoute"))
     }
 
     listen() {

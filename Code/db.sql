@@ -78,7 +78,7 @@ create table alumno_materia (
 	constraint fk_alumnoMateria_alumno foreign key (id_alumno) references alumno (id) on update cascade on delete cascade
 );
 
-create table maestro_materia (
+create table materia_maestro (
 	id int(5) auto_increment primary key,
 	id_materia int(5) not null,
 	id_maestro int(5) not null,
@@ -101,19 +101,38 @@ create table grupo_maestro (
 insert into
 	grupo (nombre, aula, createdAt, updatedAt)
 VALUES
-	("A", 101,"2022_05_06","2022_05_06"),
-	("B", 102,"2022_05_06","2022_05_06"),
-	("C", 103,"2022_05_06","2022_05_06");
+	("A", 101, "2022_05_06", "2022_05_06"),
+	("B", 102, "2022_05_06", "2022_05_06"),
+	("C", 103, "2022_05_06", "2022_05_06"),
+	("D", 104, "2022_05_06", "2022_05_06");
 
 insert into
 	materia (nombre, descripcion, createdAt, updatedAt)
 VALUES
 	(
 		"Matematicas Uno",
-		"Introducción a las matematicas", "2022_05_06","2022_05_06"
+		"Introducción a las matematicas",
+		"2022_05_06",
+		"2022_05_06"
 	),
-	("Español Uno", "Introducción al español", "2022_05_06","2022_05_06"),
-	("Historia Uno", "Introducción a la historia", "2022_05_06","2022_05_06");
+	(
+		"Español Uno",
+		"Introducción al español",
+		"2022_05_06",
+		"2022_05_06"
+	),
+	(
+		"Historia Uno",
+		"Introducción a la historia",
+		"2022_05_06",
+		"2022_05_06"
+	),
+	(
+		"Arte Uno",
+		"Introducción al arte",
+		"2022_05_06",
+		"2022_05_06"
+	);
 
 insert into
 	maestro (
@@ -121,7 +140,9 @@ insert into
 		fecha_nacimiento,
 		imagen,
 		correo,
-		contrasenia, createdAt, updatedAt
+		contrasenia,
+		createdAt,
+		updatedAt
 	)
 VALUES
 	(
@@ -129,28 +150,36 @@ VALUES
 		"1990-3-14",
 		"imagenMarco.jpg",
 		"Marco@gmail.com",
-		"123456", "2022_05_06","2022_05_06"
+		"123456",
+		"2022_05_06",
+		"2022_05_06"
 	),
 	(
 		"Saul",
 		"1994-4-10",
 		"imagenSaul.jpg",
 		"Saul@gmail.com",
-		"123456", "2022_05_06","2022_05_06"
+		"123456",
+		"2022_05_06",
+		"2022_05_06"
 	),
 	(
 		"Antonio",
 		"1980-1-2",
 		"imagenAntonio.jpg",
 		"Antonio@gmail.com",
-		"123456", "2022_05_06","2022_05_06"
+		"123456",
+		"2022_05_06",
+		"2022_05_06"
 	),
 	(
 		"Fernando",
 		"1994-4-1",
 		"imagenFernando.jpg",
 		"Fernando@gmail.com",
-		"123456", "2022_05_06","2022_05_06"
+		"123456",
+		"2022_05_06",
+		"2022_05_06"
 	);
 
 insert into
@@ -160,7 +189,9 @@ insert into
 		imagen,
 		correo,
 		id_grupo,
-		contrasenia, createdAt, updatedAt
+		contrasenia,
+		createdAt,
+		updatedAt
 	)
 VALUES
 	(
@@ -169,7 +200,9 @@ VALUES
 		"imagenIvan.jpg",
 		"Ivan@gmail.com",
 		1,
-		"123456", "2022_05_06","2022_05_06"
+		"123456",
+		"2022_05_06",
+		"2022_05_06"
 	),
 	(
 		"Nicolas",
@@ -177,7 +210,9 @@ VALUES
 		"imagenNicolas.jpg",
 		"Nicolas@gmail.com",
 		2,
-		"123456", "2022_05_06","2022_05_06"
+		"123456",
+		"2022_05_06",
+		"2022_05_06"
 	),
 	(
 		"Martin",
@@ -185,7 +220,9 @@ VALUES
 		"imagenMartin.jpg",
 		"Martin@gmail.com",
 		3,
-		"123456", "2022_05_06","2022_05_06"
+		"123456",
+		"2022_05_06",
+		"2022_05_06"
 	),
 	(
 		"Manuel",
@@ -193,7 +230,9 @@ VALUES
 		"imagenManuel.jpg",
 		"Manuel@gmail.com",
 		1,
-		"123456", "2022_05_06","2022_05_06"
+		"123456",
+		"2022_05_06",
+		"2022_05_06"
 	);
 
 insert into
@@ -203,7 +242,9 @@ insert into
 		archivo,
 		id_grupo,
 		id_materia,
-		id_maestro, createdAt, updatedAt
+		id_maestro,
+		createdAt,
+		updatedAt
 	)
 VALUES
 	(
@@ -212,7 +253,9 @@ VALUES
 		"archivoSumas.pdf",
 		1,
 		1,
-		1, "2022_05_06","2022_05_06"
+		1,
+		"2022_05_06",
+		"2022_05_06"
 	),
 	(
 		"Tarea verbos",
@@ -220,7 +263,9 @@ VALUES
 		"archivoVerbos.pdf",
 		2,
 		2,
-		2, "2022_05_06","2022_05_06"
+		2,
+		"2022_05_06",
+		"2022_05_06"
 	),
 	(
 		"Tarea 5 de Mayo",
@@ -228,7 +273,9 @@ VALUES
 		"archivosHistoria.pdf",
 		3,
 		3,
-		3, "2022_05_06","2022_05_06"
+		3,
+		"2022_05_06",
+		"2022_05_06"
 	),
 	(
 		"Tarea restas",
@@ -236,7 +283,9 @@ VALUES
 		"archivorestas.pdf",
 		3,
 		3,
-		4, "2022_05_06","2022_05_06"
+		4,
+		"2022_05_06",
+		"2022_05_06"
 	),
 	(
 		"Tarea multiplicaciones",
@@ -244,36 +293,72 @@ VALUES
 		"archivomultiplicaciones.pdf",
 		2,
 		1,
-		1, "2022_05_06","2022_05_06"
+		1,
+		"2022_05_06",
+		"2022_05_06"
 	);
 
 insert into
-	entregas (archivo, calificacion, id_tarea, id_alumno, createdAt, updatedAt)
+	entregas (
+		archivo,
+		calificacion,
+		id_tarea,
+		id_alumno,
+		createdAt,
+		updatedAt
+	)
 VALUES
-	("imagenivan.jpg", 10.0, 1, 1, "2022_05_06","2022_05_06"),
-	("imagenManuel.jpg", 8.0, 1, 4, "2022_05_06","2022_05_06"),
-	("imagenNicolas.jpg", 9.0, 2, 2, "2022_05_06","2022_05_06");
+	(
+		"imagenivan.jpg",
+		10.0,
+		1,
+		1,
+		"2022_05_06",
+		"2022_05_06"
+	),
+	(
+		"imagenManuel.jpg",
+		8.0,
+		1,
+		4,
+		"2022_05_06",
+		"2022_05_06"
+	),
+	(
+		"imagenNicolas.jpg",
+		9.0,
+		2,
+		2,
+		"2022_05_06",
+		"2022_05_06"
+	);
 
 insert into
-	alumno_materia (calificacion, id_materia, id_alumno, createdAt, updatedAt)
+	alumno_materia (
+		calificacion,
+		id_materia,
+		id_alumno,
+		createdAt,
+		updatedAt
+	)
 VALUES
-	(9.0, 1, 1, "2022_05_06","2022_05_06"),
-	(10.0, 1, 4, "2022_05_06","2022_05_06"),
-	(7.0, 2, 2, "2022_05_06","2022_05_06"),
-	(7.0, 3, 3, "2022_05_06","2022_05_06");
+	(9.0, 1, 1, "2022_05_06", "2022_05_06"),
+	(10.0, 2, 2, "2022_05_06", "2022_05_06"),
+	(7.0, 3, 3, "2022_05_06", "2022_05_06"),
+	(7.0, 4, 4, "2022_05_06", "2022_05_06");
 
 insert into
-	maestro_materia (id_materia, id_maestro, createdAt, updatedAt)
+	materia_maestro (id_materia, id_maestro, createdAt, updatedAt)
 VALUES
-	(1, 1, "2022_05_06","2022_05_06"),
-	(1, 2, "2022_05_06","2022_05_06"),
-	(3, 3, "2022_05_06","2022_05_06"),
-	(3, 2, "2022_05_06","2022_05_06");
+	(1, 1, "2022_05_06", "2022_05_06"),
+	(2, 2, "2022_05_06", "2022_05_06"),
+	(3, 3, "2022_05_06", "2022_05_06"),
+	(4, 4, "2022_05_06", "2022_05_06");
 
 insert into
 	grupo_maestro (id_grupo, id_maestro, createdAt, updatedAt)
 VALUES
-	(1, 1, "2022_05_06","2022_05_06"),
-	(1, 2, "2022_05_06","2022_05_06"),
-	(3, 3, "2022_05_06","2022_05_06"),
-	(2, 1, "2022_05_06","2022_05_06");
+	(1, 1, "2022_05_06", "2022_05_06"),
+	(2, 2, "2022_05_06", "2022_05_06"),
+	(3, 3, "2022_05_06", "2022_05_06"),
+	(4, 4, "2022_05_06", "2022_05_06");

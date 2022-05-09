@@ -1,12 +1,15 @@
 const { response, request } = require("express")
-const {AlumnoModel,GrupoModel, MaestroModel} = require("../Models/indexModel")
+const {AlumnoModel,GrupoModel, MaestroModel, Grupo_MaestroModel} = require("../Models/indexModel")
 
-const grupoAlumnoGet = async (req = request, res = response) => {
+
+const getAllGrupos = async (req = request, res = response) => {
     try {
         const grupos = await GrupoModel.findAll({
             include: {
-                model: AlumnoModel
+                model: Grupo_MaestroModel,
+                through: { attributes: [] }
             }
+            
         })
         res.json(grupos)
     } catch (error) {
@@ -15,21 +18,7 @@ const grupoAlumnoGet = async (req = request, res = response) => {
     }
 }
 
-const grupo_MaestroGet = async (req = request, res = response) => {
-    try {
-        const grupos = await GrupoModel.findAll({
-            include: {
-                model: MaestroModel
-            }
-        })
-        res.json(grupos)
-    } catch (error) {
-        res.json({message: error.message})
-        
-    }
-}
 
 module.exports = {
-    grupoAlumnoGet,
-    grupo_MaestroGet
+    getAllGrupos
 }
