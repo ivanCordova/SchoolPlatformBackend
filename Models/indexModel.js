@@ -13,13 +13,25 @@ const { Grupo_MaestroModel } = require("./grupo_maestroModel")
 GrupoModel.hasMany(AlumnoModel, {foreignKey: "id_grupo"})
 AlumnoModel.belongsTo(GrupoModel, {foreignKey: "id_grupo"})
 
-//alumno*......*tarea
-AlumnoModel.belongsToMany(TareaModel,{through: EntregasModel, foreignKey: "id_tarea"})
-TareaModel.belongsToMany(AlumnoModel,{through: EntregasModel, foreignKey: "id_alumno"})
+// tarea 1......* grupo
+GrupoModel.hasMany(TareaModel, {foreignKey: "id_grupo"})
+TareaModel.belongsTo(GrupoModel, {foreignKey: "id_grupo"})
+
+// tarea 1......* materia
+MateriaModel.hasMany(TareaModel, {foreignKey: "id_materia"})
+TareaModel.belongsTo(MateriaModel, {foreignKey: "id_materia"})
+
+// tarea 1......* maestro
+MaestroModel.hasMany(TareaModel, {foreignKey: "id_maestro"})
+TareaModel.belongsTo(MaestroModel, {foreignKey: "id_maestro"})
+
+//alumno* .... *tarea
+AlumnoModel.belongsToMany(TareaModel,{through: EntregasModel, foreignKey: "id_alumno"})
+TareaModel.belongsToMany(AlumnoModel,{through: EntregasModel, foreignKey: "id_tarea"})
 
 //alumno* ..... *materia
-AlumnoModel.belongsToMany(MateriaModel,{through:Alumno_materiaModel, foreignKey:"id_materia"})
-MateriaModel.belongsToMany(AlumnoModel,{through:Alumno_materiaModel, foreignKey:"id_alumno"})
+AlumnoModel.belongsToMany(MateriaModel,{through:Alumno_materiaModel, foreignKey:"id_alumno"})
+MateriaModel.belongsToMany(AlumnoModel,{through:Alumno_materiaModel, foreignKey:"id_materia"})
 
 //materia* ..... *maestro
 MateriaModel.belongsToMany(MaestroModel,{through:Materia_maestroModel, foreignKey:"id_materia"})
