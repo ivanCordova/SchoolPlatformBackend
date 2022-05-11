@@ -1,38 +1,38 @@
 const { response, request } = require("express")
-const {EntregasModel } = require("../Models/indexModel")
+const {Grupo_MaestroModel} = require("../Models/indexModel")
 
 
-const getAllEntregas = async (req = request, res = response) => {
+const getAllGrupo_Maestro = async (req = request, res = response) => {
     try {
-        const entregas = await EntregasModel.findAll()
-        res.status(200).json(entregas)
+        const grupo_maestro = await Grupo_MaestroModel.findAll()
+        res.status(200).json(grupo_maestro)
     } catch (error) {
         res.status(500).json({message: error.message})
     }
 }
 
-const getEntrega = async (req = request, res = response) => {
+const getGrupo_Maestro = async (req = request, res = response) => {
     try {
         const id = req.params.id
-        const entrega = await EntregasModel.findAll({
+        const grupo_maestro = await Grupo_MaestroModel.findAll({
             where:{id}
         })
-        if(entrega == 0){
+        if(grupo_maestro == 0){
             return res.status(400).json({
                 msg :'No se encontro al alumno_materia'
             });
         }else{
 
-            res.status(200).json(entrega)
+            res.status(200).json(grupo_maestro)
         }
     } catch (error) {
         res.status(500).json({message: error.message})
     }
 }
 
-const createEntrega = async (req = request, res = response) => {
+const createGrupo_Maestro = async (req = request, res = response) => {
     try {
-        await EntregasModel.create(req.body)
+        await Grupo_MaestroModel.create(req.body)
         res.status(200).json({
             "message": "¡Registro creado correctamente!"
         })
@@ -41,9 +41,9 @@ const createEntrega = async (req = request, res = response) => {
     }
 }
 
-const updateEntrega = async (req = request, res = response) => {
+const updateGrupo_Maestro = async (req = request, res = response) => {
     try {
-        await EntregasModel.update(req.body,{
+        await Grupo_MaestroModel.update(req.body,{
             where:{id: req.params.id}
         })
         res.status(200).json({
@@ -54,9 +54,9 @@ const updateEntrega = async (req = request, res = response) => {
     }
 }
 
-const deleteEntrega = async (req = request, res = response) => {
+const deleteGrupo_Maestro = async (req = request, res = response) => {
     try {
-        await EntregasModel.destroy({
+        await Grupo_MaestroModel.destroy({
             where: {id: req.params.id}
         })
         res.status(200).json({
@@ -68,9 +68,9 @@ const deleteEntrega = async (req = request, res = response) => {
 }
 
 module.exports = {
-    getAllEntregas,
-    getEntrega,
-    createEntrega,
-    updateEntrega,
-    deleteEntrega
+    getAllGrupo_Maestro,
+    getGrupo_Maestro,
+    createGrupo_Maestro,
+    updateGrupo_Maestro,
+    deleteGrupo_Maestro
 }

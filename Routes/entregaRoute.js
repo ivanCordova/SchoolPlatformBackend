@@ -1,14 +1,12 @@
 const { Router } = require("express")
-const { getAllEntregas } = require("../Controllers/entregaController")
+const { getAllEntregas, getEntrega, createEntrega, updateEntrega, deleteEntrega } = require("../Controllers/entregaController")
 
 const router = Router()
 
-
-router.get("/",getAllEntregas)
-/* router.get('/', getAllAlumnos)
-router.get('/:id', getAlumno)
-router.post("/",createAlumno),
-router.put('/:id', updateAlumno)
-router.delete("/:id", deleteAlumno) */
+router.get('/', getAllEntregas)
+router.get('/:id', getEntrega)
+router.post("/",createEntrega),
+router.put('/:id', updateEntrega)
+router.delete("/:id", deleteEntrega)
 
 module.exports = router

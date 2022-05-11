@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize')
 const { db } = require("../Database/connect")
 
-const EntregasModel = db.define("tarea",{
+const EntregasModel = db.define("entregas",{
     id: {type: DataTypes.INTEGER, autoIncrement: true,primaryKey: true},
     archivo: {type: DataTypes.STRING, allowNull: false},
     calificacion: {type: DataTypes.DECIMAL, allowNull: false},

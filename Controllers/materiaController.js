@@ -1,9 +1,15 @@
 const { response, request } = require("express")
-const {MateriaModel} = require("../Models/indexModel")
+const {MateriaModel, TareaModel, AlumnoModel} = require("../Models/indexModel")
 
 const getAllMaterias = async (req = request, res = response) => {
     try {
-        const materias = await MateriaModel.findAll()
+        const materias = await MateriaModel.findAll({
+            include: [{
+                model: TareaModel
+            },{
+                model: AlumnoModel
+            }]
+        })
         res.status(200).json(materias)
     } catch (error) {
         res.status(500).json({message: error.message})
