@@ -26,7 +26,6 @@ const getAllAlumnos = async (req = request, res = response) => {
             }
         }
 
-        //const alumnos = await AlumnoModel.findAll()
         res.status(200).json(await alumnos())
     } catch (error) {
         res.status(500).json({ message: error.message })
@@ -36,24 +35,39 @@ const getAllAlumnos = async (req = request, res = response) => {
 const getAlumno = async (req = request, res = response) => {
     try {
         const id = req.params.id
-        const alumnos = await AlumnoModel.findAll({
-            where: { id },
-            include: {
-                model: GrupoModel
+        const alumnos = async () => {
+            switch (req.query.extra) {
+                case "grupo":
+                    return await AlumnoModel.findAll({where: { id }, include: GrupoModel })
+                    break;
+                case "tarea":
+                    return await AlumnoModel.findAll({where: { id }, include: TareaModel })
+                    break;
+                case "materia":
+                    return await AlumnoModel.findAll({where: { id }, include: MateriaModel })
+                    break;
+                case "all":
+                    return await AlumnoModel.findAll({where: { id }, include: { all: true } })
+                    break;
+                default:
+                    return await AlumnoModel.findAll({where: { id }})
+                    break;
             }
-        })
-        if (alumnos == 0) {
+        }
+        if ((await alumnos()) == 0) {
             return res.status(400).json({
                 msg: 'No se encontro al alumno'
             });
         } else {
 
-            res.status(200).json(alumnos)
+            res.status(200).json(await alumnos())
         }
     } catch (error) {
         res.status(500).json({ message: error.message })
     }
 }
+
+
 
 const createAlumno = async (req = request, res = response) => {
     try {
