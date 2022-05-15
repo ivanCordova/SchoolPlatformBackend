@@ -22,7 +22,7 @@ create table maestro (
 	fecha_nacimiento date not null,
 	imagen varchar(50),
 	correo varchar(50) not null,
-	contrasenia varchar(50) not null,
+	contrasenia varchar(150) not null,
 	createdAt date not null,
 	updatedAt date not null
 );
@@ -34,7 +34,7 @@ create table alumno (
 	imagen varchar(50),
 	correo varchar(50) not null,
 	id_grupo int(5) not null,
-	contrasenia varchar(50) not null,
+	contrasenia varchar(150) not null,
 	createdAt date not null,
 	updatedAt date not null,
 	constraint fk_grupo_alumno foreign key (id_grupo) references grupo (id) on update cascade on delete cascade

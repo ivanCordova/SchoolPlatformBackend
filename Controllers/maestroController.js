@@ -1,4 +1,5 @@
 const { response, request } = require("express")
+const { encrypt } = require("../helper/handleBcrypt")
 const {MaestroModel, Grupo_MaestroModel, GrupoModel, AlumnoModel, MateriaModel, Materia_maestroModel } = require("../Models/indexModel")
 
 
@@ -51,7 +52,15 @@ const getMaestro = async (req = request, res = response) => {
 
 const createMaestro = async (req = request, res = response) => {
     try {
-        await MaestroModel.create(req.body)
+        const {nombre, fecha_nacimiento, imagen, correo, contrasenia } = req.body
+        const passwordHash = await encrypt(contrasenia)
+        await MaestroModel.create({
+            nombre,
+            fecha_nacimiento,
+            imagen,
+            correo,
+            contrasenia: passwordHash
+        })
         res.status(200).json({
             "message": "¡Registro creado correctamente!"
         })

@@ -14,6 +14,7 @@ class Server {
         this.alumnoMateriaPath = process.env.alumnoMateriaPath
         this.materiaMaestroPath = process.env.materiaMaestroPath
         this.grupoMaestroPath = process.env.grupoMaestroPath
+        this.loginPath = process.env.loginPath
 
         // Middlewares
         this.middlewares()
@@ -40,6 +41,7 @@ class Server {
         this.app.use(this.alumnoMateriaPath, require("../Routes/alumno_materiaRoute"))
         this.app.use(this.materiaMaestroPath, require("../Routes/materia_maestroRoute"))
         this.app.use(this.grupoMaestroPath, require("../Routes/grupo_maestroRoute"))
+        this.app.use(this.loginPath, require("../Routes/authRoute"))
     }
 
     listen() {

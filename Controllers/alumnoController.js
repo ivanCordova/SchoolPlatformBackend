@@ -1,4 +1,5 @@
 const { response, request } = require("express")
+const { encrypt } = require("../helper/handleBcrypt")
 const { AlumnoModel, TareaModel, EntregasModel, MateriaModel } = require("../Models/indexModel")
 const { GrupoModel } = require("../Models/indexModel")
 
@@ -71,7 +72,16 @@ const getAlumno = async (req = request, res = response) => {
 
 const createAlumno = async (req = request, res = response) => {
     try {
-        await AlumnoModel.create(req.body)
+        const {nombre, fecha_nacimiento, imagen, correo, id_grupo, contrasenia } = req.body
+        const passwordHash = await encrypt(contrasenia)
+        await AlumnoModel.create({
+            nombre,
+            fecha_nacimiento,
+            imagen,
+            correo,
+            id_grupo,
+            contrasenia: passwordHash
+        })
         res.status(200).json({
             "message": "¡Registro creado correctamente!"
         })
