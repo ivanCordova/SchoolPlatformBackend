@@ -15,6 +15,7 @@ class Server {
         this.materiaMaestroPath = process.env.materiaMaestroPath
         this.grupoMaestroPath = process.env.grupoMaestroPath
         this.loginPath = process.env.loginPath
+        this.filePath = process.env.filePath
 
         // Middlewares
         this.middlewares()
@@ -27,6 +28,7 @@ class Server {
         this.app.use(cors())
         //Exponemos el directorio publico 
         this.app.use(express.static("Public"))
+        this.app.use("/imagenes",express.static("uploads"))
         //Parse y lectura del body
         this.app.use(express.json())
     }
@@ -42,6 +44,7 @@ class Server {
         this.app.use(this.materiaMaestroPath, require("../Routes/materia_maestroRoute"))
         this.app.use(this.grupoMaestroPath, require("../Routes/grupo_maestroRoute"))
         this.app.use(this.loginPath, require("../Routes/authRoute"))
+        this.app.use(this.filePath, require("../Routes/uploadRoute"))
     }
 
     listen() {

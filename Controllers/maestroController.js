@@ -1,6 +1,19 @@
 const { response, request } = require("express")
 const { encrypt } = require("../helper/handleBcrypt")
 const {MaestroModel, Grupo_MaestroModel, GrupoModel, AlumnoModel, MateriaModel, Materia_maestroModel } = require("../Models/indexModel")
+const multer = require("multer")
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads')
+    },
+    filename: function (req, file, cb) {
+        cb(null, `${Date.now()} - ${file.originalname}`)
+    }
+})
+
+const upload = multer({ storage: storage }).single("fotoMaestro")
+
 
 
 const getAllMaestros = async (req = request, res = response) => {
@@ -52,12 +65,13 @@ const getMaestro = async (req = request, res = response) => {
 
 const createMaestro = async (req = request, res = response) => {
     try {
-        const {nombre, fecha_nacimiento, imagen, correo, contrasenia } = req.body
+        const {nombre, fecha_nacimiento, imagen, correo, contrasenia } = JSON.parse(req.body.datos)
         const passwordHash = await encrypt(contrasenia)
+        const file = req.file
         await MaestroModel.create({
             nombre,
             fecha_nacimiento,
-            imagen,
+            imagen: file.filename,
             correo,
             contrasenia: passwordHash
         })
@@ -101,6 +115,7 @@ module.exports = {
     getMaestro,
     createMaestro,
     updateMaestro,
-    deleteMaestro
+    deleteMaestro,
+    upload
 
 }
