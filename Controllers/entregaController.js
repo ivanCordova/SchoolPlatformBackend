@@ -1,6 +1,6 @@
 const { response, request } = require("express")
 const {EntregasModel } = require("../Models/indexModel")
-
+    
 
 const getAllEntregas = async (req = request, res = response) => {
     try {
