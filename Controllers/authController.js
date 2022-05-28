@@ -19,9 +19,9 @@ const loginAuthAlumno = async (req = request, res = response) => {
 
                     const checkPassword = await compare(contrasenia, alumno.contrasenia)
                     if (checkPassword) {
-                        res.status(200).json({ message: "Usuario y contraseñia correcta" })
+                        res.status(200).json(alumno)
                     } else {
-                        res.status(404).json({ message: "Usuario o contraseña no validos" })
+                        res.status(404).json(alumno)
                     }
                 }
 
@@ -35,7 +35,7 @@ const loginAuthAlumno = async (req = request, res = response) => {
 
                     const checkPassword = await compare(contrasenia, maestro.contrasenia)
                     if (checkPassword) {
-                        res.status(200).json({ message: "Usuario y contraseñia correcta" })
+                        res.status(200).json(maestro)
                     } else {
                         res.status(404).json({ message: "Usuario o contraseña no validos" })
                     }

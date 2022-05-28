@@ -36,6 +36,7 @@ const getMateria = async (req = request, res = response) => {
     }
 }
 
+
 const createMateria = async (req = request, res = response) => {
     try {
         await MateriaModel.create(req.body)

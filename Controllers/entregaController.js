@@ -1,6 +1,19 @@
 const { response, request } = require("express")
 const {EntregasModel } = require("../Models/indexModel")
-    
+const multer = require("multer")
+
+
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads')
+    },
+    filename: function (req, file, cb) {
+        cb(null, `${Date.now()} - ${file.originalname}`)
+    }
+})
+
+const upload = multer({ storage: storage }).single("entrega")
 
 const getAllEntregas = async (req = request, res = response) => {
     try {
@@ -32,7 +45,14 @@ const getEntrega = async (req = request, res = response) => {
 
 const createEntrega = async (req = request, res = response) => {
     try {
-        await EntregasModel.create(req.body)
+        const {archivo, calificacion, id_tarea, id_alumno } = JSON.parse(req.body.datos)
+        const file = req.file
+        await EntregasModel.create({
+            archivo: file.filename,
+            calificacion,
+            id_tarea,
+            id_alumno
+        })
         res.status(200).json({
             "message": "¡Registro creado correctamente!"
         })
@@ -72,5 +92,6 @@ module.exports = {
     getEntrega,
     createEntrega,
     updateEntrega,
-    deleteEntrega
+    deleteEntrega,
+    upload
 }
