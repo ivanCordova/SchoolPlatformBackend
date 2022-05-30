@@ -37,7 +37,9 @@ const getMateria = async (req = request, res = response) => {
     try {
         const id = req.params.id
         const materia = await MateriaModel.findAll({
-            where: { id }
+            where: { id },
+            include:{all: true}
+
         })
         if (materia == 0) {
             return res.status(400).json({

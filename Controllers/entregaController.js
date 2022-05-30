@@ -17,7 +17,9 @@ const upload = multer({ storage: storage }).single("entrega")
 
 const getAllEntregas = async (req = request, res = response) => {
     try {
-        const entregas = await EntregasModel.findAll()
+        const entregas = await EntregasModel.findAll({
+            include: { all: true }
+        })
         res.status(200).json(entregas)
     } catch (error) {
         res.status(500).json({message: error.message})
